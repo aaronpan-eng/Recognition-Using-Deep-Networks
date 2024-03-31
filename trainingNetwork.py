@@ -3,6 +3,7 @@
 
 # import statements
 import sys
+import os
 import torch
 from torch import nn
 import torch.optim as optim
@@ -38,14 +39,18 @@ class MyNetwork(nn.Module):
         x = self.customNN(x)
         return x
 
-# useful functions with a comment for each function
+# FUNCTIONS:
+
+# Runs one epoch to train the model
 def train_network(dataloader, model, loss_fn, optimizer, batch_size, acc_plt, loss_plt, sample_train):
     size = len(dataloader.dataset)
     # Set the model to training mode - important for batch normalization and dropout layers
     # Unnecessary in this situation but added for best practices
     model.train()
+
     # for accuracy in train
     correct_train = 0
+
     for batch, (X, y) in enumerate(dataloader):
         # Compute prediction and loss
         pred = model(X)
@@ -71,6 +76,7 @@ def train_network(dataloader, model, loss_fn, optimizer, batch_size, acc_plt, lo
             acc_plt.append(accuracy_train)
             loss_plt.append(loss)
 
+# Runs one epoch to test the network
 def test_network(dataloader, model, loss_fn, acc_plt, loss_plt, sample_train, sample_test):
     # Set the model to evaluation mode - important for batch normalization and dropout layers
     # Unnecessary in this situation but added for best practices
@@ -95,7 +101,9 @@ def test_network(dataloader, model, loss_fn, acc_plt, loss_plt, sample_train, sa
     loss_plt.append(test_loss)
     sample_test.append(sample_train[-1])
 
-# main function (yes, it needs a comment too)
+# MAIN FUNCTION
+
+# Main loop to train, test, and save the network to a file
 def main(argv):
     # handle any command line arguments in argv
 
@@ -139,7 +147,8 @@ def main(argv):
         plt.title(labels_map[label])
         plt.axis("off")
         plt.imshow(img.squeeze(), cmap="gray")
-    # plt.show()
+    plt.show(block=False)
+    plt.pause(0.1)
 
     model = MyNetwork().to(device)
     print(model)
@@ -167,6 +176,11 @@ def main(argv):
         test_network(test_loader, model, loss_fn, test_acc, test_loss, train_samples, test_samples)
     print("Done!")
 
+    file_name = 'data/weights/CustomNetwork_MNIST.pth'
+    file_path = os.path.join(os.getcwd(), file_name)
+
+    torch.save(model.state_dict(), file_path)
+
     #accuracy plot
     plt.figure(figsize=(10, 5))
     plt.plot(train_samples, train_acc, label='Training Accuracy')
@@ -174,6 +188,7 @@ def main(argv):
     plt.xlabel('Number of Training Examples Seen')
     plt.ylabel('Accuracy')
     plt.legend()
+    plt.show(block=False)
 
     plt.figure(figsize=(10, 5))
     plt.plot(train_samples, train_loss, label='Training Accuracy')
@@ -181,10 +196,8 @@ def main(argv):
     plt.xlabel('Number of Training Examples Seen')
     plt.ylabel('Negative Log Likelyhood Loss')
     plt.legend()
-
     plt.show()
-
-    torch.save(model.state_dict(), 'CustomNetwork_MNIST.pth')
+    
     return
 
 if __name__ == "__main__":
