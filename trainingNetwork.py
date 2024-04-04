@@ -117,7 +117,7 @@ def main(argv):
     )
     print(f"Using {device} device")
 
-    batch_size = 64
+    batch_size = 32
 
     train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=ToTensor())
     test_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=ToTensor())
@@ -153,8 +153,8 @@ def main(argv):
     model = MyNetwork().to(device)
     print(model)
 
-    learning_rate = 1e-3
-    epochs = 5
+    learning_rate = 1e-2
+    epochs = 12
     # Initialize the loss function
     loss_fn = nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
