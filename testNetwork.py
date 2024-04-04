@@ -35,7 +35,7 @@ class MyNetwork(nn.Module):
         )
 
     # computes a forward pass for the network
-    # methods need a summary comment
+    # use forward and sequential from before to make the network
     def forward(self, x):
         x = self.customNN(x)
         return x
@@ -66,7 +66,7 @@ def main(argv):
             correct += (predicted == labels).sum().item()
             images_to_plot.append(images.squeeze().numpy())
 
-            # Print output values and index of max output value
+            # Print 
             print(f'Example {i + 1}:')
             print('Output values:', ['%.2f' % val for val in outputs.squeeze().tolist()])
             print('Index of max output value:', predicted.item())
@@ -93,7 +93,7 @@ def main(argv):
         transforms.Grayscale(),
         transforms.Resize((28, 28)),
         transforms.ToTensor(),
-        lambda x: 1 - x  # Invert colors
+        lambda x: 1 - x  # inverting color
     ])
 
     predictions = []
@@ -105,19 +105,21 @@ def main(argv):
         if os.path.exists(img_path):
             # Read image
             img = cv2.imread(img_path)
-            # Convert image to tensor and apply transformations
+            # Convert to tensor and transform
             img_tensor = transform(img)
             # Add batch dimension
             img_tensor = img_tensor.unsqueeze(0)
+
             # Forward pass
             with torch.no_grad():
                 output = model(img_tensor)
                 _, predicted = torch.max(output, 1)
                 predictions.append(predicted.item())
                 images_to_plot.append(img_tensor.squeeze().numpy())
-                print('Correct label:', i)
+                print('Image: ', i)
                 print('Output values:', ['%.2f' % val for val in output.squeeze().tolist()])
                 print('Index of max output value:', predicted.item())
+                print('Correct label:', i)
                 print()
         else:
             print(f"Image {i}.jpg not found.")
