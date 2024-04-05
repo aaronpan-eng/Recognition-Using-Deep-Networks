@@ -1,4 +1,5 @@
-# Your name here and a short header
+# Aaron Pan/Abhishek Uddaraju
+# Task 2: Loading first layers of network from task 1
 
 # import statements
 import sys
@@ -12,15 +13,19 @@ from torchvision.transforms import ToTensor
 import numpy as np
 import cv2
 
-# main function (yes, it needs a comment too)
+# Contains Task 2 and Extension for visualizing model weights and filtered images
 def main(argv):
     # handle any command line arguments in argv
     # loading model
+    #load model
     model = torch.load('data/weights/CustomNetwork_MNIST.pth', map_location=torch.device('cpu'))
     #print(model)
 
+    #extract first layer
     conv1_weights = model['customNN.0.weight']
     N = conv1_weights.size(0)
+
+    #display filter outputs
     fig, axes = plt.subplots(N//4, 4, figsize=(10, N))
     for i, ax in enumerate(axes.flat):
         ax.imshow(conv1_weights[i, 0])
@@ -29,13 +34,14 @@ def main(argv):
     plt.tight_layout()
     plt.show(block = False)
 
+    #training/test datasets and data loaders
     train_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=ToTensor())
     test_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=ToTensor())
 
     train_loader = DataLoader(train_dataset, batch_size=64, shuffle=True)
     test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
 
-    # Getting image form dataset
+    #getting image form dataset
     image, label = next(iter(test_loader))
     image_np = image.squeeze().numpy()
 
@@ -87,13 +93,17 @@ def main(argv):
         transforms.ToTensor(),           # Convert images to PyTorch tensors
     ])
 
+    #get mnist dataset from pytorch
     mnist_dataset = datasets.MNIST(root='./data', train=False, download=True, transform=transform)
     mnist_loader = torch.utils.data.DataLoader(mnist_dataset, batch_size=1, shuffle=True)
 
+    #change model to eval mode
     model.eval()
 
+    #list to keep images for plotting
     filtered_images = []
 
+    #processing thru filter
     with torch.no_grad():
         for images, labels in mnist_loader:
             # Feed through the first layer
