@@ -1,5 +1,6 @@
 # Aaron Pan/Abhishek Uddaraju
 # Testing the network on MNIST
+# TASK 1 SECOND PART
 
 # import statements
 import sys
