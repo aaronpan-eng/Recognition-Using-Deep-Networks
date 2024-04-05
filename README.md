@@ -21,7 +21,7 @@ Welcome to our deep learning project focused on exploring the manipulation and i
 ## Usage
 | Task Number | File|
 |----------|----------|
-| Task 1| | 
-| Task 2|  | 
-| Task 3| | 
-| Task 4| | 
+| Task 1| trainingNetwork.py, testNetwork.py| 
+| Task 2| Task2.py| 
+| Task 3| Task3.py| 
+| Task 4| Task4.py| 
