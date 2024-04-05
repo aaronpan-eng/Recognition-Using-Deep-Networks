@@ -1,5 +1,6 @@
-# Aaron Pan
-# Training NN on MNIST data
+# Aaron Pan/Abhishek Uddaraju
+# Training NN on MNIST data 
+# TASK 1 FIRST PART
 
 # import statements
 import sys
