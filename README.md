@@ -17,13 +17,14 @@
 ## Introduction:
 Welcome to our deep learning project focused on exploring the manipulation and interpretation of deep neural networks (DNNs). This project delves into the intricacies of building, training, analyzing, and modifying DNNs for a recognition task using the MNIST digit recognition dataset. MNIST is chosen not only for its simplicity in building and training networks without a GPU but also for its ability to showcase the capabilities of deep networks effectively.
 
-## Project Report
+## Project Report:
 [Recognition Using Deep Networks PDF](https://drive.google.com/file/d/1HMbRKsCT3JYkGIEWbN8IfdnDfHwHrWs-/view?usp=sharing)
 
 
-## Link for the hand written dataset: https://drive.google.com/drive/folders/1FcgrWzE6jp0lbw1RPP0_N4hrzsxQ8I5J?usp=sharing
+## Link for the hand written dataset:
+[Hand written dataset](https://drive.google.com/drive/folders/1FcgrWzE6jp0lbw1RPP0_N4hrzsxQ8I5J?usp=sharing)
 
-## Usage
+## Usage:
 | Task Number | File|
 |----------|----------|
 | Task 1| trainingNetwork.py, testNetwork.py| 
