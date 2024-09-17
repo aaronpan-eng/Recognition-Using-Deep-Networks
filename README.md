@@ -11,7 +11,7 @@
 
 ## Table of Contents
 1. [Intoduction](#introduction)
-2. [Project Report](#projectreport)
+2. [Project Report](#project-report)
 3. [Usage](#usage)
 
 ## Introduction:
