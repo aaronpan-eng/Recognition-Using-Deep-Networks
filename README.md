@@ -11,7 +11,8 @@
 
 ## Table of Contents
 1. [Intoduction](#introduction)
-2. [Usage](#usage)
+2. [Project Report](#projectreport)
+3. [Usage](#usage)
 
 ## Introduction:
 Welcome to our deep learning project focused on exploring the manipulation and interpretation of deep neural networks (DNNs). This project delves into the intricacies of building, training, analyzing, and modifying DNNs for a recognition task using the MNIST digit recognition dataset. MNIST is chosen not only for its simplicity in building and training networks without a GPU but also for its ability to showcase the capabilities of deep networks effectively.
